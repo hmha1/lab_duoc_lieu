@@ -4,75 +4,562 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Natural Products & AI Lab | Bộ môn Dược liệu</title>
-  <meta name="description" content="Trang giới thiệu nhóm nghiên cứu về chiết xuất dược liệu, dược lý mạng, hóa tin và sàng lọc ảo.">
+  <meta name="description" content="Trang giới thiệu nhóm nghiên cứu dược liệu, hóa tin, dược lý mạng và sàng lọc ảo.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;650;750;850&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/styles.css">
-</head>
-<body>
-  
-<header class="site-header">
-  <nav class="navbar">
-    <a class="brand" href="index.html" aria-label="Trang chủ">
-      <span class="brand-mark">DL</span>
-      <span class="brand-text"><strong>Natural Products & AI Lab</strong><span>Bộ môn Dược liệu</span></span>
-    </a>
-    <div class="nav-wrap">
-      <button class="theme-toggle" type="button" aria-label="Đổi giao diện"></button>
-      <button class="menu-btn" type="button" aria-label="Mở menu">☰</button>
-      <div class="nav-links"><a href="index.html">Giới thiệu</a><a href="research.html">Hướng nghiên cứu</a><a href="publications.html">Công bố</a><a href="members.html">Thành viên</a><a href="books.html">Sách</a><a href="lectures.html">Bài giảng</a><a href="contact.html">Liên hệ</a><a href="blog.html">Blog</a><a href="gallery.html">Thư viện</a></div>
-    </div>
-  </nav>
-</header>
 
-  <main class="container hero">
-    <section class="reveal">
-      <span class="eyebrow">Bộ môn Dược liệu · Nghiên cứu liên ngành</span>
-      <h1>Khám phá dược liệu bằng thực nghiệm, dữ liệu và trí tuệ nhân tạo.</h1>
-      <p class="lead">Nhóm nghiên cứu tập trung vào tối ưu hóa chiết xuất dược liệu, dược lý mạng, hóa tin và sàng lọc ảo nhằm tìm kiếm các hợp chất tiềm năng phục vụ nghiên cứu phát triển thuốc.</p>
-      <div class="hero-actions">
-        <a class="btn" href="research.html">Xem hướng nghiên cứu</a>
-        <a class="btn secondary" href="contact.html">Liên hệ hợp tác</a>
+  <!-- Homepage override: chỉ cần thay file index.html, không cần sửa CSS ngoài -->
+  <style>
+    :root {
+      --home-bg: #f6efe3;
+      --home-panel: rgba(255, 250, 241, 0.88);
+      --home-ink: #21372f;
+      --home-muted: #60726a;
+      --home-green: #2f6657;
+      --home-green-2: #5b907e;
+      --home-gold: #c79a53;
+      --home-line: rgba(47, 102, 87, 0.16);
+      --home-shadow: 0 24px 70px rgba(35, 51, 45, 0.12);
+    }
+
+    html[data-theme="dark"] {
+      --home-bg: #101916;
+      --home-panel: rgba(21, 31, 28, 0.90);
+      --home-ink: #edf5f1;
+      --home-muted: #afbeb8;
+      --home-green: #89d2b8;
+      --home-green-2: #6fb79f;
+      --home-gold: #e0ba7f;
+      --home-line: rgba(237, 245, 241, 0.13);
+      --home-shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+    }
+
+    body {
+      background:
+        radial-gradient(circle at 8% 10%, rgba(199, 154, 83, 0.16), transparent 30rem),
+        radial-gradient(circle at 92% 62%, rgba(47, 102, 87, 0.12), transparent 34rem),
+        linear-gradient(135deg, var(--home-bg), #fbf7ef);
+    }
+
+    html[data-theme="dark"] body {
+      background:
+        radial-gradient(circle at 8% 10%, rgba(224, 186, 127, 0.10), transparent 30rem),
+        radial-gradient(circle at 92% 62%, rgba(137, 210, 184, 0.10), transparent 34rem),
+        linear-gradient(135deg, #101916, #14201d);
+    }
+
+    .home-wrap {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 38px 36px 70px;
+    }
+
+    .home-hero {
+      display: grid;
+      grid-template-columns: minmax(620px, 1.05fr) minmax(520px, 0.95fr);
+      gap: 56px;
+      align-items: center;
+      min-height: calc(100vh - 110px);
+    }
+
+    .home-copy {
+      position: relative;
+      z-index: 2;
+    }
+
+    .home-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(199, 154, 83, 0.14);
+      color: var(--home-green);
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      border: 1px solid var(--home-line);
+    }
+
+    .home-title {
+      margin: 22px 0 20px;
+      font-family: Merriweather, Georgia, serif;
+      font-size: clamp(3.15rem, 4.2vw, 5.6rem);
+      line-height: 1.05;
+      letter-spacing: -0.055em;
+      color: var(--home-ink);
+      max-width: 900px;
+    }
+
+    .home-title .accent {
+      color: var(--home-green);
+      white-space: nowrap;
+    }
+
+    .home-lead {
+      max-width: 760px;
+      font-size: 1.16rem;
+      line-height: 1.85;
+      color: var(--home-muted);
+      margin: 0;
+    }
+
+    .home-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .home-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 13px 22px;
+      border-radius: 999px;
+      border: 1px solid var(--home-green);
+      background: var(--home-green);
+      color: #fff;
+      font-weight: 900;
+      box-shadow: var(--home-shadow);
+    }
+
+    .home-btn.secondary {
+      background: transparent;
+      color: var(--home-green);
+      box-shadow: none;
+    }
+
+    .home-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 24px;
+    }
+
+    .home-tags span {
+      padding: 9px 13px;
+      border-radius: 999px;
+      border: 1px solid var(--home-line);
+      background: var(--home-panel);
+      color: var(--home-muted);
+      font-weight: 700;
+      font-size: 0.92rem;
+    }
+
+    .chemo-panel {
+      position: relative;
+      min-height: 610px;
+      border-radius: 34px;
+      background: var(--home-panel);
+      border: 1px solid var(--home-line);
+      box-shadow: var(--home-shadow);
+      overflow: hidden;
+      padding: 24px;
+    }
+
+    .chemo-panel::before {
+      content: "";
+      position: absolute;
+      inset: 18px;
+      border-radius: 28px;
+      background:
+        linear-gradient(rgba(47, 102, 87, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(47, 102, 87, 0.06) 1px, transparent 1px);
+      background-size: 34px 34px;
+      pointer-events: none;
+    }
+
+    .screen {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      min-height: 562px;
+      border-radius: 28px;
+      border: 1px solid var(--home-line);
+      background:
+        radial-gradient(circle at 20% 18%, rgba(199, 154, 83, 0.18), transparent 16rem),
+        radial-gradient(circle at 80% 76%, rgba(47, 102, 87, 0.12), transparent 18rem),
+        rgba(255, 255, 255, 0.44);
+      padding: 22px;
+      overflow: hidden;
+    }
+
+    html[data-theme="dark"] .screen {
+      background:
+        radial-gradient(circle at 20% 18%, rgba(224, 186, 127, 0.10), transparent 16rem),
+        radial-gradient(circle at 80% 76%, rgba(137, 210, 184, 0.12), transparent 18rem),
+        rgba(255, 255, 255, 0.03);
+    }
+
+    .screen-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .window-dots {
+      display: flex;
+      gap: 7px;
+    }
+
+    .window-dots span {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--home-line);
+    }
+
+    .screen-label {
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(47, 102, 87, 0.10);
+      color: var(--home-green);
+      font-weight: 900;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+    }
+
+    .chemo-layout {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      height: calc(100% - 42px);
+    }
+
+    .mol-card, .data-card, .network-card-home, .extract-card-home {
+      border: 1px solid var(--home-line);
+      background: rgba(255, 250, 241, 0.72);
+      border-radius: 24px;
+      padding: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    html[data-theme="dark"] .mol-card,
+    html[data-theme="dark"] .data-card,
+    html[data-theme="dark"] .network-card-home,
+    html[data-theme="dark"] .extract-card-home {
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .mol-card {
+      min-height: 335px;
+      grid-row: span 2;
+    }
+
+    .mini-title {
+      color: var(--home-green);
+      font-weight: 900;
+      font-size: 0.88rem;
+      margin-bottom: 10px;
+    }
+
+    .mol-svg {
+      width: 100%;
+      height: 250px;
+    }
+
+    .floating-chip {
+      position: absolute;
+      padding: 8px 11px;
+      border-radius: 999px;
+      border: 1px solid var(--home-line);
+      background: var(--home-panel);
+      color: var(--home-green);
+      font-weight: 900;
+      font-size: 0.78rem;
+      box-shadow: 0 12px 34px rgba(35, 51, 45, 0.10);
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .chip-q { left: 24px; bottom: 28px; }
+    .chip-d { left: 122px; bottom: 60px; animation-delay: .7s; }
+    .chip-n { right: 24px; bottom: 28px; animation-delay: 1.2s; }
+
+    .fp-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 1fr);
+      gap: 7px;
+      margin-top: 10px;
+    }
+
+    .fp-grid span {
+      aspect-ratio: 1;
+      border-radius: 5px;
+      background: rgba(47, 102, 87, 0.15);
+      animation: blink 4.5s ease-in-out infinite;
+    }
+
+    .fp-grid span:nth-child(3n) { background: rgba(199, 154, 83, 0.48); }
+    .fp-grid span:nth-child(4n) { animation-delay: .5s; }
+    .fp-grid span:nth-child(5n) { animation-delay: 1s; }
+
+    .bars {
+      display: flex;
+      align-items: end;
+      height: 120px;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .bars span {
+      flex: 1;
+      border-radius: 10px 10px 4px 4px;
+      background: linear-gradient(180deg, var(--home-green-2), var(--home-green));
+      animation: rise 4.5s ease-in-out infinite;
+    }
+
+    .bars span:nth-child(1) { height: 42%; }
+    .bars span:nth-child(2) { height: 72%; animation-delay: .35s; }
+    .bars span:nth-child(3) { height: 55%; animation-delay: .7s; }
+    .bars span:nth-child(4) { height: 88%; animation-delay: 1.05s; }
+    .bars span:nth-child(5) { height: 64%; animation-delay: 1.4s; }
+
+    .network-mini {
+      height: 154px;
+    }
+
+    .extract-card-home {
+      min-height: 130px;
+    }
+
+    .drop {
+      position: absolute;
+      right: 24px;
+      bottom: 18px;
+      width: 72px;
+      height: 92px;
+      border-radius: 40px 40px 22px 22px;
+      background: linear-gradient(160deg, rgba(199,154,83,.28), rgba(47,102,87,.28));
+      transform: rotate(8deg);
+      animation: float 5.5s ease-in-out infinite;
+    }
+
+    .focus-section {
+      max-width: 1500px;
+      margin: 0 auto;
+      padding: 12px 36px 76px;
+    }
+
+    .focus-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 28px;
+      align-items: end;
+      margin-bottom: 24px;
+    }
+
+    .focus-head h2 {
+      font-family: Merriweather, Georgia, serif;
+      font-size: clamp(2rem, 2.8vw, 3.2rem);
+      color: var(--home-ink);
+      letter-spacing: -0.035em;
+    }
+
+    .focus-head p {
+      max-width: 620px;
+      color: var(--home-muted);
+      margin: 0;
+    }
+
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .focus-card {
+      min-height: 250px;
+      border: 1px solid var(--home-line);
+      border-radius: 26px;
+      background: var(--home-panel);
+      box-shadow: var(--home-shadow);
+      padding: 24px;
+    }
+
+    .focus-card .no {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      background: rgba(199, 154, 83, 0.16);
+      color: var(--home-green);
+      font-weight: 900;
+      margin-bottom: 18px;
+    }
+
+    .focus-card h3 {
+      color: var(--home-ink);
+      font-size: 1.28rem;
+      margin-bottom: 10px;
+    }
+
+    .focus-card p {
+      color: var(--home-muted);
+      margin: 0;
+    }
+
+    @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+    @keyframes blink { 0%,100% { opacity: .28; transform: scale(.95); } 45% { opacity: 1; transform: scale(1); } }
+    @keyframes rise { 0%,100% { transform: scaleY(1); } 50% { transform: scaleY(1.08); } }
+
+    @media (max-width: 1240px) {
+      .home-wrap { padding-inline: 24px; }
+      .home-hero { grid-template-columns: 1fr; min-height: auto; }
+      .home-title { max-width: 1000px; font-size: clamp(2.8rem, 7vw, 5rem); }
+      .chemo-panel { min-height: 540px; }
+      .focus-grid { grid-template-columns: 1fr; }
+      .focus-head { flex-direction: column; align-items: start; }
+    }
+
+    @media (max-width: 760px) {
+      .home-wrap { padding: 28px 18px 50px; }
+      .home-title { font-size: clamp(2.35rem, 12vw, 3.8rem); }
+      .chemo-layout { grid-template-columns: 1fr; }
+      .chemo-panel { min-height: auto; padding: 14px; }
+      .screen { min-height: auto; padding: 16px; }
+      .mol-card { min-height: 290px; }
+      .focus-section { padding-inline: 18px; }
+    }
+  </style>
+</head>
+
+<body class="page-body">
+  <header class="site-header">
+    <nav class="navbar">
+      <a class="brand" href="index.html" aria-label="Trang chủ">
+        <span class="brand-mark">DL</span>
+        <span class="brand-text"><strong>Natural Products & AI Lab</strong><span>Bộ môn Dược liệu</span></span>
+      </a>
+      <div class="nav-wrap">
+        <button class="theme-toggle" type="button" aria-label="Đổi giao diện"></button>
+        <button class="menu-btn" type="button" aria-label="Mở menu">☰</button>
+        <div class="nav-links">
+          <a href="index.html">Giới thiệu</a>
+          <a href="research.html">Hướng nghiên cứu</a>
+          <a href="publications.html">Công bố</a>
+          <a href="members.html">Thành viên</a>
+          <a href="books.html">Sách</a>
+          <a href="lectures.html">Bài giảng</a>
+          <a href="contact.html">Liên hệ</a>
+          <a href="blog.html">Blog</a>
+          <a href="gallery.html">Thư viện</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="home-wrap">
+      <div class="home-hero">
+        <div class="home-copy reveal">
+          <div class="home-kicker">Bộ môn Dược liệu · Nghiên cứu liên ngành</div>
+          <h1 class="home-title">Khám phá dược liệu bằng <span class="accent">AI</span> và hóa tin.</h1>
+          <p class="home-lead">
+            Nhóm nghiên cứu tập trung vào tối ưu hóa chiết xuất dược liệu, dược lý mạng, hóa tin và sàng lọc ảo nhằm tìm kiếm các hợp chất tiềm năng phục vụ nghiên cứu phát triển thuốc.
+          </p>
+
+          <div class="home-tags">
+            <span>Chiết xuất dược liệu</span>
+            <span>Dược lý mạng</span>
+            <span>Cheminformatics</span>
+            <span>Virtual screening</span>
+          </div>
+
+          <div class="home-actions">
+            <a class="home-btn" href="research.html">Xem hướng nghiên cứu</a>
+            <a class="home-btn secondary" href="contact.html">Liên hệ hợp tác</a>
+          </div>
+        </div>
+
+        <div class="chemo-panel reveal" aria-label="Minh họa cheminformatics">
+          <div class="screen">
+            <div class="screen-top">
+              <div class="window-dots"><span></span><span></span><span></span></div>
+              <div class="screen-label">CHEMINFORMATICS WORKFLOW</div>
+            </div>
+
+            <div class="chemo-layout">
+              <section class="mol-card">
+                <div class="mini-title">Molecular representation</div>
+                <svg class="mol-svg" viewBox="0 0 420 280" xmlns="http://www.w3.org/2000/svg" fill="none">
+                  <path d="M92 92L152 58L212 92V160L152 194L92 160V92Z" stroke="var(--home-green)" stroke-width="7" stroke-linejoin="round"/>
+                  <path d="M212 92L272 58L332 92V160L272 194L212 160" stroke="var(--home-green)" stroke-width="7" stroke-linejoin="round"/>
+                  <path d="M152 58V22M272 58V22M92 160L54 184M332 160L370 184" stroke="var(--home-green)" stroke-width="7" stroke-linecap="round"/>
+                  <circle cx="152" cy="22" r="12" fill="var(--home-gold)"/>
+                  <circle cx="272" cy="22" r="12" fill="var(--home-gold)"/>
+                  <circle cx="54" cy="184" r="12" fill="var(--home-green-2)"/>
+                  <circle cx="370" cy="184" r="12" fill="var(--home-green-2)"/>
+                  <path d="M76 235c30-22 66-28 106-16 40 12 72 14 112-4 28-13 54-13 78 4" stroke="var(--home-gold)" stroke-width="8" stroke-linecap="round" opacity=".75"/>
+                  <path d="M98 238h232" stroke="var(--home-green)" stroke-width="3" stroke-dasharray="9 9" opacity=".35"/>
+                </svg>
+                <span class="floating-chip chip-q">QSAR</span>
+                <span class="floating-chip chip-d">Docking</span>
+                <span class="floating-chip chip-n">NPN</span>
+              </section>
+
+              <section class="data-card">
+                <div class="mini-title">Fingerprint bits</div>
+                <div class="fp-grid">
+                  <span></span><span></span><span></span><span></span><span></span>
+                  <span></span><span></span><span></span><span></span><span></span>
+                  <span></span><span></span><span></span><span></span><span></span>
+                  <span></span><span></span><span></span><span></span><span></span>
+                  <span></span><span></span><span></span><span></span><span></span>
+                  <span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </section>
+
+              <section class="network-card-home">
+                <div class="mini-title">Predicted activity</div>
+                <div class="bars"><span></span><span></span><span></span><span></span><span></span></div>
+              </section>
+
+              <section class="extract-card-home">
+                <div class="mini-title">Natural product pipeline</div>
+                <p style="color: var(--home-muted); margin:0; max-width: 260px;">
+                  Extract → identify → model → screen → validate
+                </p>
+                <div class="drop"></div>
+              </section>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section class="hero-visual panel reveal" aria-label="Minh họa động về dược liệu và AI">
-      <div class="orbit-stage">
-        <div class="orbit one"><span class="dot"></span></div>
-        <div class="orbit two"><span class="dot"></span></div>
-        <div class="orbit three"><span class="dot"></span></div>
-        <div class="leaf-card"></div>
-        <div class="molecule-node n1">QSAR</div>
-        <div class="molecule-node n2">Dock</div>
-        <div class="molecule-node n3">NPN</div>
+    <section class="focus-section">
+      <div class="focus-head reveal">
+        <h2>Trọng tâm nghiên cứu</h2>
+        <p>Ba hướng nghiên cứu chính được kết nối trong một workflow thống nhất: từ dược liệu thực nghiệm đến dữ liệu phân tử và mô hình tính toán.</p>
+      </div>
+
+      <div class="focus-grid">
+        <article class="focus-card reveal">
+          <div class="no">01</div>
+          <h3>Tối ưu hóa chiết xuất dược liệu kết hợp AI</h3>
+          <p>Tối ưu dung môi, nhiệt độ, thời gian và các biến quy trình bằng thiết kế thí nghiệm, mô hình hóa và công cụ AI.</p>
+        </article>
+        <article class="focus-card reveal">
+          <div class="no">02</div>
+          <h3>Dược lý mạng</h3>
+          <p>Phân tích hợp chất, đích tác dụng, con đường sinh học và mạng protein nhằm lý giải cơ chế tác dụng đa thành phần.</p>
+        </article>
+        <article class="focus-card reveal">
+          <div class="no">03</div>
+          <h3>Hóa tin và sàng lọc ảo</h3>
+          <p>Ứng dụng fingerprint, descriptor, QSAR, docking và mô hình học sâu để ưu tiên hợp chất tiềm năng.</p>
+        </article>
       </div>
     </section>
   </main>
-
-  <section class="container">
-    <div class="section-head reveal">
-      <h2>Trọng tâm nghiên cứu</h2>
-      <p>Trang web được thiết kế theo cấu trúc nhiều trang, phù hợp để triển khai trực tiếp bằng GitHub Pages và mở rộng dần khi có công bố, thành viên hoặc bài viết mới.</p>
-    </div>
-    <div class="grid-3">
-      <article class="card reveal">
-        <div class="card-icon">01</div>
-        <h3>Chiết xuất dược liệu</h3>
-        <p>Tối ưu dung môi, nhiệt độ, thời gian và các biến quy trình bằng thiết kế thí nghiệm, mô hình hóa và công cụ AI.</p>
-      </article>
-      <article class="card reveal">
-        <div class="card-icon">02</div>
-        <h3>Dược lý mạng</h3>
-        <p>Phân tích hợp chất, đích tác dụng, con đường sinh học và mạng protein nhằm lý giải cơ chế tác dụng đa thành phần.</p>
-      </article>
-      <article class="card reveal">
-        <div class="card-icon">03</div>
-        <h3>Hóa tin và sàng lọc ảo</h3>
-        <p>Ứng dụng fingerprint, descriptor, QSAR, docking, mô phỏng và mô hình học sâu để ưu tiên hợp chất tiềm năng.</p>
-      </article>
-    </div>
-  </section>
 
   <footer class="footer">© 2026 Natural Products & AI Lab · Bộ môn Dược liệu</footer>
   <script src="assets/script.js"></script>
